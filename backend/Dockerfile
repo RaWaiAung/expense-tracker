@@ -2,36 +2,36 @@ FROM node:22-alpine As development
 
 WORKDIR /usr/src/app
 
-COPY ./backend/package.json ./
+COPY package.json ./
 
-COPY ./backend/package-lock.json ./
+COPY package-lock.json ./
 
-COPY ./backend/src ./src
+COPY libs ./libs
 
-COPY ./backend/libs ./libs
+COPY tsconfig.build.json ./tsconfig.build.json
 
-COPY ./backend/tsconfig.build.json ./tsconfig.build.json
+COPY tsconfig.json ./tsconfig.json
 
-COPY ./backend/tsconfig.json ./tsconfig.json
+COPY nest-cli.json ./nest-cli.json
 
-COPY ./backend/nest-cli.json ./nest-cli.json
+RUN npm install
 
-RUN yarn install
+COPY src ./src
 
-RUN yarn build
+RUN npm run build
 
 
 FROM node:22-alpine
 
 WORKDIR /usr/src/app
 
-COPY ./backend/package*.json ./
+COPY package*.json ./
 
 ENV PORT=4000
 
 ENV NODE_ENV=production
 
-RUN yarn install --production
+RUN npm install --production
 
 COPY --from=development /usr/src/app/dist ./dist
 

@@ -1,4 +1,5 @@
-import type { ApiResponse, UploadResponse } from "../types/auth-types";
+import type { UploadResponse } from "../types/auth-types";
+import type { ApiResponse } from "../types/common-types";
 import { API_PATHS } from "./apiPath";
 import axiosInstance from "./axiosInstance";
 

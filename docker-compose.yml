@@ -1,0 +1,47 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+      target: development
+    restart: always
+    ports:
+      - 4000:4000
+    env_file:
+      - ./backend/.env
+    command: >
+      sh -c "
+      npm run start:dev
+      "
+    volumes:
+      - /app/node_modules
+      - ./logs/backend:/app/logs
+      - ./backend:/app
+      - ./backend/libs:/libs
+    depends_on:
+      - mongo
+    networks:
+      - default
+  # frontend:
+  #   build:
+  #     context: ./frontend
+  #     dockerfile: Dockerfile
+  #     target: development
+  #   ports:
+  #     - 5173:80
+  #   volumes:
+  #     - ./frontend:/app
+  #     - /app/node_modules
+  #   networks:
+  #     - default
+  #   depends_on:
+  #     - backend
+
+  mongo:
+    image: mongo
+
+networks:
+  default:
+
+volumes:
+  mongo-db:

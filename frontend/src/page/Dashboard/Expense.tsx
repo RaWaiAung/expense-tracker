@@ -6,12 +6,12 @@ import Modal from "../../components/Modal";
 import AddExpenseForm from "../../components/Expense/AddExpenseForm";
 import ExpenseList from "../../components/Expense/ExpenseList";
 import DeleteAlert from "../../components/Income/DeleteAlert";
-import type { CreateExpensePayload, DeleteExpenseResponse, Expense, GetExpensesResponse } from "../../types/expense-types";
+import type { CreateExpensePayload, DeleteExpenseResponse, Expense as ExpenseType, GetExpensesResponse } from "../../types/expense-types";
 import axiosInstance from "../../utils/axiosInstance";
 import { API_PATHS } from "../../utils/apiPath";
 
 const Expense = () => {
-  const [expenseData, setExpenseData] = useState<Expense[]>([]);
+  const [expenseData, setExpenseData] = useState<ExpenseType[]>([]);
   const [loading, setLoading] = useState(false);
   const [openDeleteAlert, setOpenDeleteAlert] = useState({
     show: false,

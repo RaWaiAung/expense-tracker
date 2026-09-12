@@ -1,4 +1,4 @@
-import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import { Navigate, Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import SignUp from './page/Auth/SignUp';
 import Login from './page/Auth/Login';
 import Expense from './page/Dashboard/Expense';
@@ -12,24 +12,34 @@ const App = () => {
     <UserProvider>
       <Router>
         <Routes>
-          <Route element={
-            <ProtectRoute />
-          }>
-            <Route index path="/dashboard" element={<Home />} />
-              <Route path="/expense" element={<Expense />} />
-              <Route path="/income" element={<Income />} />
+          {/* Root */}
+          <Route path="/" element={<Navigate to="/dashboard" replace />} />
+
+          {/* Protected Routes */}
+          <Route element={<ProtectRoute />}>
+            <Route path="/dashboard" element={<Home />} />
+            <Route path="/expense" element={<Expense />} />
+            <Route path="/income" element={<Income />} />
           </Route>
+          {/* Protected Routes */}
+          <Route element={<ProtectRoute />}>
+            <Route path="/dashboard" element={<Home />} />
+            <Route path="/expense" element={<Expense />} />
+            <Route path="/income" element={<Income />} />
+          </Route>
+
+          {/* Public Routes */}
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
         </Routes>
       </Router>
       <Toaster
-       toastOptions={{
-        // className="",
-        style: {
-          fontSize: "13px"
-        }
-       }}
+        toastOptions={{
+          // className="",
+          style: {
+            fontSize: "13px"
+          }
+        }}
       />
     </UserProvider>
   )
