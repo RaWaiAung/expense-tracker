@@ -30,6 +30,7 @@ const Login = () => {
 
         // Login logic here
         try {
+console.log('Axios baseURL =', axiosInstance.defaults.baseURL);
             const response = await axiosInstance.post<ApiResponse<AuthResponse>>(API_PATHS.AUTH.LOGIN, {
                 email,
                 password

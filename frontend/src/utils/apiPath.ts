@@ -33,7 +33,7 @@ const API_URL = import.meta.env.VITE_API_URL;
 //     UPLOAD_IMAGE: `${API_URL}/upload/image`,
 //   }
 // };
-console.log(API_URL)
+console.log('VITE_API_URL =', import.meta.env.VITE_API_URL);
 export const API_PATHS = {
   DASHBOARD: {
     GET_DASHBOARD_DATA: `${API_URL}/dashboard`,
